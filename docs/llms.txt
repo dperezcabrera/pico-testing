@@ -1,0 +1,22 @@
+# pico-testing
+
+> Pytest plugin with isolated container fixtures for the pico ecosystem
+
+## Docs
+
+- [Home](https://dperezcabrera.github.io/pico-testing/)
+- [Getting Started](https://dperezcabrera.github.io/pico-testing/getting-started/)
+- [Architecture](https://dperezcabrera.github.io/pico-testing/architecture/)
+- [index](https://dperezcabrera.github.io/pico-testing/reference/)
+- [API](https://dperezcabrera.github.io/pico-testing/reference/api/)
+- [AI Coding Skills](https://dperezcabrera.github.io/pico-testing/skills/)
+- [FAQ](https://dperezcabrera.github.io/pico-testing/faq/)
+- [Troubleshooting](https://dperezcabrera.github.io/pico-testing/troubleshooting/)
+- [Changelog](https://dperezcabrera.github.io/pico-testing/CHANGELOG/)
+
+## For agents
+
+- [Full docs in one file](https://dperezcabrera.github.io/pico-testing/llms-full.txt)
+- [AGENTS.md (conventions and boundaries)](https://raw.githubusercontent.com/dperezcabrera/pico-testing/main/AGENTS.md)
+- [Flagship use case (whole ecosystem wired)](https://dperezcabrera.github.io/pico-boot/flagship/)
+- [PyPI](https://pypi.org/project/pico-testing/)
