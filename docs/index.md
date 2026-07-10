@@ -27,3 +27,5 @@ def test_greeter(make_container):
 ```
 
 The container is shut down automatically when the test ends, and `PICO_BOOT_AUTO_PLUGINS=false` guarantees the test does not depend on which pico plugins happen to be installed in the venv.
+
+**See it in context**: the [flagship use case](https://dperezcabrera.github.io/pico-boot/flagship/) wires this module into a full order platform together with the rest of the ecosystem.
