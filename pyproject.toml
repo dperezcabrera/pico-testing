@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pico-testing"
+dynamic = ["version"]
+authors = [{ name = "David Perez Cabrera", email = "dperezcabrera@gmail.com" }]
+description = "Pytest plugin for the Pico ecosystem: isolated containers by default and a make_container fixture."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+keywords = ["testing", "pytest", "fixtures", "ioc", "dependency injection", "spring boot"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "pico-ioc >= 2.2.0",
+    "pytest >= 8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest-asyncio", "pytest-cov>=5", "ruff", "pico-boot>=0.1.0"]
+
+[project.entry-points.pytest11]
+pico_testing = "pico_testing.plugin"
+
+[project.urls]
+Homepage = "https://github.com/dperezcabrera/pico-testing"
+Documentation = "https://dperezcabrera.github.io/pico-testing/"
+Repository = "https://github.com/dperezcabrera/pico-testing"
+Changelog = "https://github.com/dperezcabrera/pico-testing/blob/main/CHANGELOG.md"
+"Issue Tracker" = "https://github.com/dperezcabrera/pico-testing/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pico_testing*"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+fallback_version = "0.1.0"
+write_to = "src/pico_testing/_version.py"
+write_to_template = "__version__ = '{version}'\n"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "C901"]
+ignore = ["E501", "E701", "E731", "F401", "F811", "UP006", "UP007", "UP035", "UP045"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["F841"]
+
+[tool.ruff.format]
+quote-style = "double"

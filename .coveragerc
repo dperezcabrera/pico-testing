@@ -1,0 +1,18 @@
+[run]
+branch = True
+source =
+    pico_testing
+omit =
+    */_version.py
+
+[paths]
+pico_testing =
+    src/pico_testing
+    .tox/*/lib/*/site-packages/pico_testing
+    .tox/*/site-packages/pico_testing
+    */site-packages/pico_testing
+
+[report]
+show_missing = True
+omit =
+    */_version.py

@@ -1,0 +1,1 @@
+from .plugin import AUTO_PLUGINS_MARKER as AUTO_PLUGINS_MARKER
