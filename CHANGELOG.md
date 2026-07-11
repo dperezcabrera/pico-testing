@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-07-11
+
+### Added
+
+- `pico_module` ini option: declare the package under test once in pytest config; `make_container()` prepends it to every modules list.
+- `make_client(container)` fixture: FastAPI `TestClient` over the container's app, lifespan running, closed on teardown.
+
+### Changed
+
+- pico-ioc floor raised to 2.3.3: `make_client` teardown triggers the pico-fastapi lifespan shutdown plus the fixture's own shutdown, which needs the idempotent `PicoContainer.shutdown()`.
+
 ## [0.1.0] - 2026-07-10
 
 ### Added

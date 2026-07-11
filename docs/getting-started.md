@@ -4,7 +4,7 @@
 
 - Python >= 3.11
 - pytest >= 8
-- pico-ioc >= 2.2.0 (pico-boot only if you use `boot=True`)
+- pico-ioc >= 2.3.3 (pico-boot only if you use `boot=True`; pico-fastapi only for `make_client`)
 
 ## Install
 
@@ -19,6 +19,8 @@ pip install pico-testing
 | Isolation fixture (autouse) | Sets `PICO_BOOT_AUTO_PLUGINS=false` for every test so `pico_boot.init()` loads only explicit modules |
 | `@pytest.mark.pico_auto_plugins` | Opts a single test back into plugin auto-discovery |
 | `make_container` | Builds containers from explicit modules and config; shuts them all down on teardown |
+| `pico_module` (ini) | The package under test, prepended to every `make_container(...)` call |
+| `make_client` | FastAPI `TestClient` over a container's app; lifespan runs, closed on teardown |
 
 ## make_container
 
@@ -38,6 +40,27 @@ Signature: `make_container(*modules, config=None, boot=False)`
 - `boot=True` — uses `pico_boot.init` instead of `pico_ioc.init`. Auto-discovery stays off unless the test carries the marker.
 
 Every container created through the fixture is shut down on teardown, newest first.
+
+## Declaring the module under test
+
+```toml
+# pyproject.toml
+[tool.pytest.ini_options]
+pico_module = "my_package"
+```
+
+With this set, `make_container()` boots `my_package` alone and `make_container(other)` boots both — no test repeats the package name.
+
+## Testing HTTP endpoints
+
+```python
+def test_endpoint(make_container, make_client):
+    container = make_container("pico_fastapi", config={"fastapi": {"title": "t"}})
+    client = make_client(container)
+    assert client.get("/ping").status_code == 200
+```
+
+`make_client(container)` resolves the container's `FastAPI` app and enters a `TestClient` context, so the lifespan (and pico-fastapi's shutdown wiring) really runs. Closing it plus the fixture's own shutdown is a double `container.shutdown()` — safe on pico-ioc >= 2.3.3, which made it idempotent.
 
 ## Re-enabling auto-discovery
 

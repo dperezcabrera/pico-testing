@@ -108,7 +108,8 @@ def test_isolation_fixture_skips_env_with_marker():
 
 
 def test_make_container_teardown_shuts_down_newest_first():
-    gen = plugin.make_container.__wrapped__()
+    fake_request = type("R", (), {"config": type("C", (), {"getini": staticmethod(lambda name: "")})()})()
+    gen = plugin.make_container.__wrapped__(fake_request)
     factory = next(gen)
     order = []
     for label in ("first", "second"):

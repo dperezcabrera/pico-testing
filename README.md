@@ -20,6 +20,8 @@ Any `pico_boot.init()` in a test auto-discovers every pico plugin installed in t
 
 - **Isolation by default**: `PICO_BOOT_AUTO_PLUGINS=false` is set for every test. Opt back in per-test with `@pytest.mark.pico_auto_plugins`.
 - **`make_container`**: builds containers from explicit modules and config, and shuts them all down on teardown.
+- **`pico_module`**: declare the package under test once in your pytest config; `make_container()` always includes it.
+- **`make_client`**: a FastAPI `TestClient` over a container's app, with the lifespan running and a safe close on teardown.
 
 ## Installation
 
@@ -57,6 +59,32 @@ import pytest
 @pytest.mark.pico_auto_plugins
 def test_full_boot(make_container):
     container = make_container(boot=True)
+```
+
+## Module under test
+
+Declare it once and drop it from every call:
+
+```toml
+# pyproject.toml
+[tool.pytest.ini_options]
+pico_module = "my_package"
+```
+
+```python
+def test_my_service(make_container):
+    service = make_container().get(MyService)
+```
+
+## Testing HTTP endpoints
+
+With [pico-fastapi](https://github.com/dperezcabrera/pico-fastapi) installed, `make_client` wraps the container's app in a `TestClient` with the lifespan running (requires pico-ioc >= 2.3.3):
+
+```python
+def test_endpoint(make_container, make_client):
+    container = make_container("pico_fastapi", config={"fastapi": {"title": "t"}})
+    client = make_client(container)
+    assert client.get("/ping").status_code == 200
 ```
 
 ## Documentation
