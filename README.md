@@ -91,9 +91,11 @@ def test_endpoint(make_container, make_client):
 
 Full documentation: https://dperezcabrera.github.io/pico-testing/
 
-## AI Coding Skills
+## Built for AI-assisted development
 
-Install [Claude Code](https://code.claude.com) or [OpenAI Codex](https://openai.com/index/introducing-codex/) skills for AI-assisted development with pico-testing:
+pico-testing is part of an ecosystem designed for humans and coding agents building software together — and this plugin IS the agent's verification loop: a change is not done until the isolated, three-line test around it runs green. Every package ships `AGENTS.md` working conventions, an `llms.txt` machine-readable docs index and documented behaviour pinned by regression tests, and releases are gated by the whole ecosystem booting together against real infrastructure. The full story: [Built for AI-assisted development](https://github.com/dperezcabrera/pico-ioc#built-for-ai-assisted-development).
+
+Install the agent skills for [Claude Code](https://code.claude.com) or [OpenAI Codex](https://openai.com/index/introducing-codex/):
 
 ```bash
 curl -sL https://raw.githubusercontent.com/dperezcabrera/pico-skills/main/install.sh | bash
