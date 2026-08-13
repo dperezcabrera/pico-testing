@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Python >= 3.11
+- Python >= 3.11 (tested on 3.11, 3.12, 3.13 and 3.14)
 - pytest >= 8
 - pico-ioc >= 2.3.3 (pico-boot only if you use `boot=True`; pico-fastapi only for `make_client`)
 
