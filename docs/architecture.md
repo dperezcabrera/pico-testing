@@ -31,3 +31,7 @@ entry point pytest11 -> plugin active in every pytest run (no conftest)
 - **pico-boot optional**: the default path uses `pico_ioc.init`; `pico_boot`
   imports only when `boot=True` is requested, keeping the dependency floor at
   pico-ioc + pytest.
+
+## Stability and versioning
+
+This module follows the ecosystem policy in [ADR-014: API Stability and Deprecation](https://github.com/dperezcabrera/pico-ioc/blob/main/docs/adr/adr-0014-api-stability-and-deprecation.md). The public API is exactly what `__all__` exports, pinned by `tests/test_exports.py`. Before 1.0 a breaking change ships as a minor release; a deprecated name keeps working, with a `DeprecationWarning` naming its replacement, for at least one minor release and 90 days before removal.
