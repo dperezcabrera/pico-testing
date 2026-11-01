@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-01
+
 ### Added
 - `__all__` declares the public API and `tests/test_exports.py` pins it, per the ecosystem stability policy (ADR-014 in pico-ioc).
 
